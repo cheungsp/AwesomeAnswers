@@ -53,10 +53,15 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    # head :unauthorized will send an empty HTTP response with a specific code,
+    # in this case the code is 401 (:unauthorized).
+    head :unauthorized unless can? :edit, @question
   end
 
   def update
-    if @question.update(question_params)
+    if !(can? :update, @question)
+      head :unauthorized
+    elsif @question.update(question_params)
       # if you have a `redirect_to` and you'd like to specify a flash message
       # then you can just pass in the `flash` or `alert` as options to the
       # `redirect_to` instead of having a separate line. Please note that this
@@ -68,8 +73,12 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    if can? :destroy, @question
     @question.destroy
     redirect_to questions_path, notice: 'Question deleted'
+  else
+    head :unauthorized
+  end
   end
 
   private
