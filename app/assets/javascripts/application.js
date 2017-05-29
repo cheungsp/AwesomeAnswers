@@ -12,3 +12,7 @@
 //
 //= require rails-ujs
 //= require_tree .
+
+// require_tree will require all files including folder and sub-folders in the
+// /app/assets/javascript folder. The files will be included in an alphabetical
+// order unless you specify otherwise
