@@ -43,6 +43,11 @@ class Question < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
 
+  has_many :taggings, dependent: :destroy
+  # we don't have to give has_many a source when the name of the relationship
+  # is the same as the source
+  has_many :tags, through: :taggings
+
   validates(:title, { presence: { message: 'must be provided' },
                       uniqueness: true })
   validates(:body, { length: { minimum: 5, maximum: 1000 }})
