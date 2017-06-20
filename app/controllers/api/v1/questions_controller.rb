@@ -11,7 +11,12 @@ class Api::V1::QuestionsController < ApplicationController
     @questions = Question.all
     # by default, rails will to look for an instance variable named
     # after controller and it will render (in this case as json)
-    render json: @questions
+    # render json: @questions
+
+    # when using jBuilder, make sure that you do not render with 'render json:...'
+    # otherwise rails will serialize the model itself into json instead of using
+    # your jbuilder view
+    render
   end
 
   def create
