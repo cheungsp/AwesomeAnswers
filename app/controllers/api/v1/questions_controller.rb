@@ -1,9 +1,8 @@
 class Api::V1::QuestionsController < Api::ApplicationController
-  skip_before_action :verify_authenticity_token
-
+  before_action :authenticate_user!
   before_action :find_question, only: [:show]
   def show
-    # test if we're getting the current_user by rendering it
+    # Test if we're getting the current_user by rendering it
     render json: current_user
     # render json: @question
   end
