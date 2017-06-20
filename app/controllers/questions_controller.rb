@@ -60,12 +60,20 @@ class QuestionsController < ApplicationController
       @questions = Question.recent(30)
     end
 
+    # respond_to enables us to send different responses depending on
+    # the format of the request
     respond_to do |format|
-      format.html { render }
-      format.json {render json: @questions }
+        # `html` is the default form. In this case, render will just show
+        # the page `index.html.erb`
+        format.html { render }
+        # with every ActiveRecord object (models), there are to_json and a as_json
+        # methods that returns JSON object with every single attribute from
+        # the model. This is what `render json: @questions` will show for every question.
+        format.json { render json: @questions }
+        format.xml { render xml: @questions }
+      end
     end
 
-  end
 
   def edit
     # head :unauthorized will send an empty HTTP response with a specific code,
