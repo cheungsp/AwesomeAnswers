@@ -3,8 +3,8 @@ class Api::V1::QuestionsController < Api::ApplicationController
   before_action :find_question, only: [:show]
   def show
     # Test if we're getting the current_user by rendering it
-    render json: current_user
-    # render json: @question
+    # render json: current_user
+    render json: @question
   end
 
   def index
