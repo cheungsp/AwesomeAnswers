@@ -59,6 +59,12 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.recent(30)
     end
+
+    respond_to do |format|
+      format.html { render }
+      format.json {render json: @questions }
+    end
+
   end
 
   def edit
