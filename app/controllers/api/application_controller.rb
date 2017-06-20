@@ -22,7 +22,7 @@ class Api::ApplicationController < ApplicationController
     # in the http request. It expects it to be in this format:
     # "Apikey <the-api-key>"
     match = request.headers['AUTHORIZATION'].match(/^Apikey (.+)/)
-    match.length == 2 ? match[1] : nil
+    match&.length == 2 ? match[1] : nil
   end
 
   def authenticate_user!
