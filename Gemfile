@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'chosen-rails'
 
 
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -46,6 +47,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'cancancan', '~> 1.10'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
+gem 'active_model_serializers'
 
 gem 'font-awesome-rails'
 
