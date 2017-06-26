@@ -29,7 +29,7 @@ class LikesController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_to question_path(like.question) }
-      format.js { render }
+      format.js { render :create }
     end
   end
 
