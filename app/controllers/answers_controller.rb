@@ -6,21 +6,27 @@ class AnswersController < ApplicationController
     @question = Question.find params[:question_id]
     @answer = Answer.new answer_params
     @answer.question = @question
-    if @answer.save
-      AnswersMailer.notify_questions_owner(@answer).deliver_later
-      redirect_to question_path(@question), notice: 'Answer Created!'
-    else
-      render 'questions/show'
+    respond_to do |format|
+      if @answer.save
+        AnswersMailer.notify_questions_owner(@answer).deliver_later
+        format.html { redirect_to question_path(@question), notice: 'Answer Created!' }
+        format.js { render :create_success }
+      else
+        format.html { render 'questions/show' }
+        format.js { render :create_failure }
+      end
     end
   end
 
   def destroy
     @question = @answer.question
+    # @question = Question.find param[:question_id]
     @answer.destroy
     redirect_to question_path(@question), notice: 'Answer Deleted!'
   end
 
   private
+
   def find_answer
     @answer = Answer.find(params[:id])
   end

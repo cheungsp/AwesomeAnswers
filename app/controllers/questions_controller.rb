@@ -23,9 +23,11 @@ class QuestionsController < ApplicationController
   # VERB: POST
   def create
     @question = Question.new question_params
+    # @question.user_id = session[:user_id]
     @question.user = current_user
     if @question.save
       QuestionReminderJob.set(wait: 5.days).perform_later(@question.id)
+
       # redirect_to question_path({ id: @question.id })
       # redirect_to question_path({ id: @question })
 
@@ -51,7 +53,6 @@ class QuestionsController < ApplicationController
     @answers = @question.answers.order(created_at: :desc)
   end
 
-
   def index
     if params.has_key? :user_id
       @user = User.find(params[:user_id])
@@ -60,24 +61,24 @@ class QuestionsController < ApplicationController
       @questions = Question.recent(30)
     end
 
-    # respond_to enables us to send different responses depending on
-    # the format of the request
+    # respond_to enables us to send different responses depending
+    # on the format of the request
     respond_to do |format|
-        # `html` is the default form. In this case, render will just show
-        # the page `index.html.erb`
-        format.html { render }
-        # with every ActiveRecord object (models), there are to_json and a as_json
-        # methods that returns JSON object with every single attribute from
-        # the model. This is what `render json: @questions` will show for every question.
-        format.json { render json: @questions }
-        format.xml { render xml: @questions }
-      end
+      # `html` is the default form. In this case, render will just show
+      # the page `index.html.erb`
+      format.html { render }
+      # with every ActiveRecord object (models), there are to_json and a as_json
+      # methods that returns JSON object with every single attribute from
+      # the model. This is what `render json: @questions` will show for every question.
+      format.json { render json: @questions }
+      format.xml { render xml: @questions }
     end
-
+  end
 
   def edit
-    # head :unauthorized will send an empty HTTP response with a specific code,
-    # in this case the code is 401 (:unauthorized).
+    # head will send an empty HTTP response with a specific code, in this case
+    # the code is 401 (:unauthorized), to see a list of available codes in Rails
+    # you can visit: http://billpatrianakos.me/blog/2013/10/13/list-of-rails-status-code-symbols/
     head :unauthorized unless can? :edit, @question
   end
 
@@ -97,11 +98,11 @@ class QuestionsController < ApplicationController
 
   def destroy
     if can? :destroy, @question
-    @question.destroy
-    redirect_to questions_path, notice: 'Question deleted'
-  else
-    head :unauthorized
-  end
+      @question.destroy
+      redirect_to questions_path, notice: 'Question deleted'
+    else
+      head :unauthorized
+    end
   end
 
   private

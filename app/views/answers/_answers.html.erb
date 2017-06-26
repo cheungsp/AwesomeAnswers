@@ -1,0 +1,11 @@
+<% answers&.each do |answer| %>
+  <div>
+    <p><%= answer.body %></p>
+    <%= link_to 'ð',
+      [@question, answer],
+      method: :delete,
+      data: { confirm: 'Are you sure?'}
+      %>
+    <hr />
+  </div>
+<% end %>
