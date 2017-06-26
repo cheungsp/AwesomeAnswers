@@ -22,7 +22,11 @@ class AnswersController < ApplicationController
     @question = @answer.question
     # @question = Question.find param[:question_id]
     @answer.destroy
-    redirect_to question_path(@question), notice: 'Answer Deleted!'
+
+    respond_to do |format|
+      format.html { redirect_to question_path(@question), notice: 'Answer Deleted!' }
+      format.js { render }
+    end
   end
 
   private

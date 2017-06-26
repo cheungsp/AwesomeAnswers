@@ -1,9 +1,10 @@
 <% answers&.each do |answer| %>
-  <div>
+  <div id="<%= dom_id(answer) %>">
     <p><%= answer.body %></p>
     <%= link_to 'ð',
       [@question, answer],
       method: :delete,
+      remote: :true,
       data: { confirm: 'Are you sure?'}
       %>
     <hr />
