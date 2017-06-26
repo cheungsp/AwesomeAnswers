@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # by default instead of html.
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :questions, only: [:index, :show, :create]
+      resources :questions, only: [:index, :show, :create, :destroy]
     end
   end
 

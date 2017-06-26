@@ -28,6 +28,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 gem 'chosen-rails'
+gem 'rack-cors'
 
 
 
