@@ -26,6 +26,7 @@
   <%= f.association :category,
                    include_blank: true,
                    prompt: 'Choose a category!' %>
+  <%= f.input :image %>
 
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

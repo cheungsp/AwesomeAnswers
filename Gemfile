@@ -30,6 +30,9 @@ gem 'jquery-rails'
 gem 'chosen-rails'
 gem 'rack-cors'
 gem 'simple_form'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
+gem 'fog'
 
 
 # Use Uglifier as compressor for JavaScript assets

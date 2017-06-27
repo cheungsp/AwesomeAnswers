@@ -1,5 +1,4 @@
-<%= form_for [@question, answer], remote: true do |f| %>
-  <%= answer&.pretty_errors %>
-  <%= f.text_area :body %>
-  <%= f.submit %>
+<%= simple_form_for [@question, answer], remote: true do |f| %>
+  <%= f.input :body %>
+  <%= f.submit class: 'btn btn-info' %>
 <% end %>
