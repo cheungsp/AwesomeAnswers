@@ -24,33 +24,31 @@
     <%= link_to 'My Liked Questions', user_liked_questions_path(current_user) %>
     |
     <% end %>
-    <%= link_to 'New Question', new_question_path %>
-    |
-    <%= link_to('Contact Us', contact_path ) %>
-
+    <%= link_to('Contact Us', contact_url) %>
     <% if user_signed_in? %>
       Hello <%= current_user.first_name %>,
       <%= link_to 'Sign out', sessions_path, method: :delete %>
     <% else %>
       |
-      <%= link_to'Sign In', new_session_path %>
+      <%= link_to 'Sign in', new_session_path %>
       |
       <%= link_to 'Sign Up', new_user_path %>
     <% end %>
-
     <!-- <a href='/contact'>Contact Us</a> -->
     <hr>
 
     <div id="flash-message">
-       <% if flash[:notice] %>
-         <div class='alert alert-success'><%= flash[:notice] %></div>
-       <% elsif flash[:alert] %>
-         <div class='alert alert-danger'><%= flash[:alert] %></div>
-       <% end %>
-     </div>
+      <% if flash[:notice] %>
+        <div class='alert alert-success'><%= flash[:notice] %></div>
+      <% elsif flash[:alert] %>
+        <div class='alert alert-danger'><%= flash[:alert] %></div>
+      <% end %>
+    </div>
 
     <%# the content of each template (such as /app/views/welcome/index.html.erb)
         will be inserted in place of the `yield` below. %>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

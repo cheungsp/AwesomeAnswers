@@ -12,36 +12,20 @@
     value `PATCH`. Also, all the fields will be prepopulated with data from
     the database. Also, note that the `submit` button will have a different
     text in here which will be `update question` %>
-<%= @question.errors.full_messages.join(', ') %>
-<%= form_for @question do |f| %>
-  <div class="form-group">
-    <%= f.label :title %>
-    <%# this f.text_field will generate an `input` HTML tag with the proper
-        `name` attribute which will be `question[title]` in this case. It will
-        also set the value to the input field to whatever the @question object
-        has preset for that perticular attribute (in this title) %>
-    <%= f.text_field :title, class: 'form-control' %>
-  </div>
-  
-  <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, class: 'form-control' %>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :tag_ids %>
-    <%= f.collection_select :tag_ids, Tag.all, :id, :name, {}, {multiple: true, class: 'chosen-select'} %>
-  </div>
+<%= simple_form_for @question do |f| %>
+  <%# simple_form detects the type of the input based on the field's database
+      column type: string -> text field
+                   text -> textarea
+                   integer -> number field
+      simple_form will add a star near the label if there is presence validator
+      of the field. If you don't like that you can add `required: false`  %>
+  <%= f.input :title, required: false %>
+  <%= f.input :body %>
+  <%= f.association :tags, input_html: { multiple: true, class: 'chosen-select' }  %>
+  <%= f.association :category,
+                   include_blank: true,
+                   prompt: 'Choose a category!' %>
 
-  <div class="form-group">
-    <%= f.label :category %>
-    <%= f.collection_select :category_id,
-      Category.all,
-      :id, # this represent the method that is used for the option tag's value
-      :name, # this repesents the method that is used for the option tag's text
-      include_blank: true,
-      prompt: 'Choose a category!'
-      %>
-  </div>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
