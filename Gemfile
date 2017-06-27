@@ -33,6 +33,7 @@ gem 'simple_form'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'fog'
+gem 'friendly_id', github: 'norman/friendly_id'
 
 
 # Use Uglifier as compressor for JavaScript assets

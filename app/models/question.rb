@@ -72,6 +72,19 @@ class Question < ApplicationRecord
     votes.up.count - votes.down.count
   end
 
+  # this method gets used by Rails when generating URLs using Rails helpers. For
+  # instance when you put something like: question_path(@question)
+  # then Rails will generate a url like: /questions/:id. Rails will use the
+  # to_param method to replace the `:id` part of the URL. By default all
+  # ActiveRecord model return `id` from the `to_param` method
+  # def to_param
+  #   "#{id}-#{title}".parameterize
+  # end
+
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :finders, :history]
+
+
   private
 
   def set_defaults
