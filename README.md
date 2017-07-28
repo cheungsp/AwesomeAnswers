@@ -1,8 +1,14 @@
 # Awesome Answers
 
-Awesome Answers is a CRUD application, allow users to sign up, post and answer questions from other users. It also allows the ability to 
-flag answers.
-Awesome Answers has an API set up on the back end, used for developing front end client http requests.
+Awesome Answers is a CRUD application, allow users to sign up, post and answer questions from other users. 
+Features:
+- Admin view
+- Ability to flag certain questions and answers
+- API backend
+- Reddit-like vote system for answers
+- Tags to categorize questions
+- Mailer system to send emails once question or answer has been submitted
+
 
 ## setup instructions
 
